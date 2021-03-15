@@ -1,23 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import CuisineIndexContainer from "./containers/CuisinesIndexContainer";
+import CuisineFormContainer from "./containers/CuisineFormContainer";
+import NewRecipeContainer from "./containers/NewRecipeContainer";
+import CuisineShowContainer from "./containers/CuisineShowContainer";
+
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <nav className="text-center bg-blue-900 text-yellow-100 p-4">
+          <NavLink
+            className="inline-block px-4 py-2"
+            activeClassName="text-yellow-300"
+            exact
+            to="/"
+          >
+            Cuisines
+          </NavLink>
+          <NavLink
+            className="inline-block px-4 py-2"
+            activeClassName="text-yellow-300"
+            exact
+            to="/cuisines/new"
+          >
+            New Cuisine
+          </NavLink>
+        </nav>
+
+        <Switch>
+          <Route exact path="/">
+            <CuisineIndexContainer />
+            Cuisines
+          </Route>
+
+          <Route path="/cuisines/new" component={CuisineFormContainer}>
+            <CuisineFormContainer />
+            New Cuisine
+          </Route>
+          <Route
+            path="/cuisines/:cuisineId/recipes/new"
+            component={NewRecipeContainer}
+          >
+            <CuisineFormContainer />
+            New Cuisine
+          </Route>
+          <Route path="/cuisines/:cuisineId" component={CuisineShowContainer}>
+            <CuisineFormContainer />
+            Cuisine
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
