@@ -24,13 +24,23 @@ function App() {
           >
             Cuisines
           </NavLink>
+
           <NavLink
             className="inline-block px-4 py-2"
             activeClassName="text-yellow-300"
             exact
-            to="/cuisines/new"
+            to="/recipes"
           >
-            New Cuisine
+            Recipes
+          </NavLink>
+
+          <NavLink
+            className="inline-block px-4 py-2"
+            activeClassName="text-yellow-300"
+            exact
+            to="/recipes/new"
+          >
+            New Recipe
           </NavLink>
         </nav>
 
@@ -44,11 +54,9 @@ function App() {
             <CuisineFormContainer />
             New Cuisine
           </Route>
-          <Route
-            path="/cuisines/:cuisineId/recipes/new"
-            component={NewRecipeContainer}
-          >
-            <CuisineFormContainer />
+
+          <Route path="/recipes/new" component={NewRecipeContainer}>
+            <NewRecipeContainer />
             New Cuisine
           </Route>
           <Route path="/cuisines/:cuisineId" component={CuisineShowContainer}>

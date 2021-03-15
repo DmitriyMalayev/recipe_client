@@ -15,4 +15,3 @@ const CuisinesList = ({ cuisines }) => {
 };
 
 export default CuisinesList;
-

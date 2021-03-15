@@ -8,7 +8,7 @@ export default class CuisineIndexContainer extends Component {
   };
 
   componentDidMount() {
-    fetch("https://localhost:3000/cuisines", {
+    fetch("http://localhost:3001/cuisines", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -28,7 +28,7 @@ export default class CuisineIndexContainer extends Component {
         {this.state.loading ? (
           "loading spinner"
         ) : (
-          <CuisinesList groups={this.state.cuisines} />
+          <CuisinesList cuisines={this.state.cuisines} />
         )}
       </section>
     );
