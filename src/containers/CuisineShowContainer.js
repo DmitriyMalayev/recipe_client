@@ -10,7 +10,7 @@ export default class CuisineShowContainer extends Component {
 
   componentDidMount() {
     const cuisineId = this.props.match.params.cuisineId;
-    fetch(`http://localhost:3000/cuisines/${cuisineId}`)
+    fetch(`http://localhost:3001/cuisines/${cuisineId}`)
       .then((res) => res.json())
       .then(({ cuisine, recipes }) => {
         this.setState({

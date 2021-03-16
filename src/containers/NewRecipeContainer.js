@@ -6,22 +6,24 @@ export default class NewRecipeContainer extends Component {
     const body = new FormData();
     //We need to add the Data from the Form into this body (FormData) object using the append method. When we do, we want to be thinking about how the rails API is expecting the event_params to look.
 
-    body.append("event[name]", form.name.value);
-    body.append("event[description]", form.description.value);
+    body.append("recipe[name]", form.name.value);
+    body.append("recipe[description]", form.description.value);
     body.append(
-      "event[recipe_image]",
+      "recipe[recipe_image]",
       form.poster.files[0],
       form.poster.value
     );
-  
 
-    fetch("http://localhost:3000/recipes", {
-        method: "POST",
-        body, 
+    fetch("http://localhost:3001/recipes", {
+      method: "POST",
+      body,
     })
-    .then((response) => response.json()).then((data) => { console.log(data) })}
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
 
-    
   render() {
     return (
       <form className="max-w-4xl w-11/12 mx-auto shadow-lg px-8 py-6">
@@ -51,14 +53,14 @@ export default class NewRecipeContainer extends Component {
         </fieldset>
         <fieldset className="">
           <label htmlFor="recipe_image" className="block uppercase">
-            Recipe Poster
+            Recipe Image
           </label>
-          <textarea
+          <input
             type="file"
             name="recipe_image"
             id="recipe_image"
             className="w-full my-4"
-          ></textarea>
+          />
         </fieldset>
         <button
           type="submit"
@@ -70,5 +72,3 @@ export default class NewRecipeContainer extends Component {
     );
   }
 }
-
-//why blank className??

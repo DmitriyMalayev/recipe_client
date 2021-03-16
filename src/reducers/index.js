@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import cuisinesReducer from "./cuisine";
+import cuisinesReducer from "./cuisines"
 
 export default combineReducers({
   cuisines: cuisinesReducer,

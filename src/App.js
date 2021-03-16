@@ -1,5 +1,4 @@
 import CuisineIndexContainer from "./containers/CuisinesIndexContainer";
-import CuisineFormContainer from "./containers/CuisineFormContainer";
 import NewRecipeContainer from "./containers/NewRecipeContainer";
 import CuisineShowContainer from "./containers/CuisineShowContainer";
 
@@ -50,17 +49,10 @@ function App() {
             Cuisines
           </Route>
 
-          <Route path="/cuisines/new" component={CuisineFormContainer}>
-            <CuisineFormContainer />
-            New Cuisine
-          </Route>
-
           <Route path="/recipes/new" component={NewRecipeContainer}>
             <NewRecipeContainer />
-            New Cuisine
           </Route>
           <Route path="/cuisines/:cuisineId" component={CuisineShowContainer}>
-            <CuisineFormContainer />
             Cuisine
           </Route>
         </Switch>

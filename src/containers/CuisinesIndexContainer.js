@@ -1,36 +1,44 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchCuisines } from "../actions/cuisines";
 import CuisinesList from "../components/CuisinesList";
 
-export default class CuisineIndexContainer extends Component {
-  state = {
-    cuisines: [],
-    loading: true,
-  };
-
+class CuisineIndexContainer extends Component {
   componentDidMount() {
-    fetch("http://localhost:3001/cuisines", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("cuisines", data);
-        this.setState({ cuisines: data, loading: false });
-      });
+    this.props.dispatchFetchCuisines();
   }
 
   render() {
+    if (this.props.loadingState === "notStarted") {
+      return null;
+    }
     return (
       <section className="max-w-6xl mx-auto mt-16">
-        {this.state.loading ? (
+        {this.props.loadingState === "inProgress" ? (
           "loading spinner"
         ) : (
-          <CuisinesList cuisines={this.state.cuisines} />
+          <CuisinesList cuisines={this.props.cuisines} />
         )}
       </section>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    cuisines: state.cuisines.list,
+    loadingState: state.cuisines.loadingState,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchFetchCuisines: () => dispatch(fetchCuisines()),
+  };
+};
+// The purpose of mapDispatchToProps to props is to give us functions that will dispatch the return values of action creators.
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CuisineIndexContainer);

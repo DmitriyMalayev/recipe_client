@@ -14,7 +14,7 @@ ReactDOM.render(
 );
 
 
-this.mapStateToProps()
+// this.mapStateToProps()
 
 
 // Transitioning to Redux will mean that most of our React component’s state will move to the store instead and access via mapStateToProps(). And, the places where we would be calling setState, we’ll instead be invoking an action creator that we’ve used mapDispatchToProps to connect to dispatch. I highly recommend reading through the guides on react-redux.js.org for the connect function.
