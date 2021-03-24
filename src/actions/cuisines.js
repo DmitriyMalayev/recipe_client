@@ -1,6 +1,12 @@
-import { START_LOADING_CUISINES, SUCCESSFULLY_LOADED_CUISINES } from "./index";
+import {
+  START_LOADING_CUISINES,
+  START_LOADING_CUISINE,
+  SUCCESSFULLY_LOADED_CUISINES,
+  SUCCESSFULLY_LOADED_CUISINE_RECIPES,
+} from "./index";
 
 export const fetchCuisines = () => {
+  //If it's a named export (not default) we need to use curly braces when importing them.
   return (dispatch) => {
     dispatch({ type: START_LOADING_CUISINES });
     fetch("http://localhost:3001/cuisines", {
@@ -11,13 +17,24 @@ export const fetchCuisines = () => {
       },
     })
       .then((response) => response.json())
-      .then((data) => {
-        dispatch({ type: SUCCESSFULLY_LOADED_CUISINES, payload: data });
+      .then((cuisineRecipesJson) => {
+        //Instead of calling setState we are invoking dispatch
+        dispatch({
+          type: SUCCESSFULLY_LOADED_CUISINES,
+          payload: cuisineRecipesJson,
+        });
       });
   };
 };
 
-// fetchCuisines doesn't need an argument because it's sole purpose it to hit an endpoint
-// To be able to access dispatch after the function is called we want to return a function that accepts dispatch as an argument and then that function will be able to do our fetch.
-
-//fetchCuisines returns a function. 
+export const fetchCuisine = (cuisineId) => {
+  //If it's a named export (not default) we need to use curly braces when importing them.
+  return (dispatch) => {
+    dispatch({ type: START_LOADING_CUISINE, payload: cuisineId });
+    fetch(`http://localhost:3001/cuisines/${cuisineId}`)
+      .then((res) => res.json())
+      .then((cuisineRecipesJson) => {
+        dispatch({ type: SUCCESSFULLY_LOADED_CUISINE_RECIPES, payload: cuisineRecipesJson });
+      });
+  };
+};

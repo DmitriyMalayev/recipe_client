@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; //Allows us to add links that we can convert to routes
+import { connect } from "react-redux";
+import { fetchCuisine } from "../actions/cuisines";
 
-export default class CuisineShowContainer extends Component {
+// We're adding centering logic to render and also a a conditional statement that will render a spinner if loading is true and the content if loading is false. Also we want to setState() after we get the data from the API, setting loading to false in the process. This will allow us to trigger a re-render that will replace the spinner with our content.
+
+class CuisineShowContainer extends Component {
   state = {
     cuisine: {},
     recipes: [],
     loading: true,
   };
+
+  //We're adding a componentDidMount() so we can trigger a fetch and get the cuisine and it's recipes. Because we have configured a route to point to our container component React Router provides a match prop that contains route parameters including :cuisineId
 
   componentDidMount() {
     const cuisineId = this.props.match.params.cuisineId;
@@ -20,7 +26,7 @@ export default class CuisineShowContainer extends Component {
         });
       });
   }
-
+  //We will not render the component contents until we have the data from the API, we don't need conditional logic to our second return statement's JSX.
   render() {
     if (this.state.loading) {
       return <div>Loading Spinner</div>;
@@ -38,7 +44,7 @@ export default class CuisineShowContainer extends Component {
         <div className="grid grid-cols-3">
           {this.state.recipes.map((recipe) => (
             <figure className="p-4 shadow">
-              <img className="" alt={recipe.name} src={"??"} />
+              <img className="" alt={recipe.name} />
               <h2>{recipe.name}</h2>
               <p>{recipe.description}</p>
             </figure>
@@ -48,3 +54,23 @@ export default class CuisineShowContainer extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, { match }) => {
+  
+  const cuisineId = match.params.cuisineId;
+  return {
+    cuisine: state.cuisine.list.find((cuisine) => cuisine.id == cuisineId),
+    recipes: state.recipes.filter((recipe) => recipe.cuisine_id == cuisineId),
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchFetchCuisine: (cuisineId) => dispatch(fetchCuisine(cuisineId)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CuisineShowContainer);

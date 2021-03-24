@@ -1,11 +1,13 @@
-import CuisineIndexContainer from "./containers/CuisinesIndexContainer";
 import NewRecipeContainer from "./containers/NewRecipeContainer";
+import CuisineIndexContainer from "./containers/CuisinesIndexContainer";
+import RecipeIndexContainer from "./containers/RecipeIndexContainer";
 import CuisineShowContainer from "./containers/CuisineShowContainer";
+// import RecipeShowContainer from "./containers/RecipeShowContainer";
 
 import React from "react";
 import {
   BrowserRouter as Router,
-  Switch,
+  Switch, //only allows a single matching route, therefore order matters.
   Route,
   NavLink,
 } from "react-router-dom";
@@ -15,20 +17,12 @@ function App() {
     <div className="App">
       <Router>
         <nav className="text-center bg-blue-900 text-yellow-100 p-4">
-          <NavLink
+          {/* If the URL exactly matches the to= property then the active className will be applied.  */}
+          <NavLink 
             className="inline-block px-4 py-2"
             activeClassName="text-yellow-300"
             exact
             to="/"
-          >
-            Cuisines
-          </NavLink>
-
-          <NavLink
-            className="inline-block px-4 py-2"
-            activeClassName="text-yellow-300"
-            exact
-            to="/recipes"
           >
             Recipes
           </NavLink>
@@ -37,23 +31,29 @@ function App() {
             className="inline-block px-4 py-2"
             activeClassName="text-yellow-300"
             exact
+            to="/cuisines"
+          >
+            Cuisines
+          </NavLink>
+
+          <NavLink
+            className="inline-block px-4 py-2"
+            activeClassName="text-yellow-300"
+            exact 
             to="/recipes/new"
           >
             New Recipe
           </NavLink>
         </nav>
 
-        <Switch>
+        <Switch>  
+          <Route exact path="/recipes/new" component={NewRecipeContainer} />
+          <Route exact path="/recipes" component={RecipeIndexContainer} />
+          <Route exact path="/cuisines" component={CuisineIndexContainer} />
+          <Route exact path="/cuisines/:cuisineId" component={CuisineShowContainer} />
+          {/* <Route exact path="/recipes/:recipeId" component={RecipeShowContainer} /> */}
           <Route exact path="/">
-            <CuisineIndexContainer />
-            Cuisines
-          </Route>
-
-          <Route path="/recipes/new" component={NewRecipeContainer}>
-            <NewRecipeContainer />
-          </Route>
-          <Route path="/cuisines/:cuisineId" component={CuisineShowContainer}>
-            Cuisine
+            <RecipeIndexContainer />
           </Route>
         </Switch>
       </Router>
@@ -61,4 +61,10 @@ function App() {
   );
 }
 
+
+
+
 export default App;
+
+
+
