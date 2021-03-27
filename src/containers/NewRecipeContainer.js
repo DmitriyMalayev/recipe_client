@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { createRecipe } from "../actions/recipes";
 import { fetchCuisines } from "../actions/cuisines";
-import { connect } from "react-redux"; //connecting react and redux
+import { connect } from "react-redux"; 
 class NewRecipeContainer extends Component {
   state = {
     cuisines: [],
@@ -25,7 +25,7 @@ class NewRecipeContainer extends Component {
 
     this.props
       .dispatchCreateRecipe(body)
-      .then((recipeJson) => {
+      .then(() => {
         this.props.history.push(`/recipes`);
       })
       .catch((errors) => {
@@ -33,9 +33,8 @@ class NewRecipeContainer extends Component {
       });
   };
 
-  //componentDidMount() is called immediately after a component is mounted. Setting state here will trigger re-rendering.
   componentDidMount() {
-    this.props.fetchCuisines();
+    this.props.dispatchFetchCuisines()
   }
 
   render() {
@@ -100,20 +99,29 @@ class NewRecipeContainer extends Component {
   }
 }
 
-export default connect((state) => ({ cuisines: state.cuisines.list }), {
-  fetchCuisines,
-  dispatchCreateRecipe: createRecipe,
-})(NewRecipeContainer);
+const mapStateToProps = (state) => {
+  return {
+    cuisines: state.cuisines.list,
+  };
+};
+//state is from store
 
-// This creates a new recipe. The inputs in the form need to match the schema.
-// For our recipe_image we implement has_one_attached :recipe_image.
-// It uses ActiveStorage
 
-//We need to add the Data from the Form into this body (FormData) object using the append method. When we do, we want to be thinking about how the rails API is expecting the event_params to look.
-//We're pulling out data from out of the target of our submit event and attach it to a formData object we're building so we can send that as a body of our post request to create the new event.
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchFetchCuisines: () => dispatch(fetchCuisines()),
+    dispatchCreateRecipe: (recipe) => dispatch(createRecipe(recipe)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(NewRecipeContainer);
+/*
+CHECK??
+  This creates a new recipe. The inputs in the form need to match the schema.
+  For our recipe_image we implement has_one_attached :recipe_image.
+  It uses ActiveStorage
 
-//We add a link from the CuisineShowContainer to the route where we can add a recipe to the cuisine. ??
+  We need to add the Data from the Form into this body (FormData) object using the append method. When we do, we want to be thinking about how the rails API is expecting the event_params to look.
+  We're pulling out data from out of the target of our submit event and attach it to a formData object we're building so we can send that as a body of our post request to create the new event.
 
-//mapStateToProps => Subscriber, Provide data and access to updates so it can  to update to the data.  Does not provide the ability to make changes, just to be able to receive updates made by others.
-
-//mapDispatchToProps => Publisher, Provides functions that would publish to all subscribers. Provides the ability to make new issues for all subscribers.
+  We add a link from the CuisineShowContainer to the route where we can add a recipe to the cuisine. ??
+*/

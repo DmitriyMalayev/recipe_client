@@ -9,6 +9,7 @@ export const fetchCuisines = () => {
   //If it's a named export (not default) we need to use curly braces when importing them.
   return (dispatch) => {
     dispatch({ type: START_LOADING_CUISINES });
+    //dispatching an action
     fetch("http://localhost:3001/cuisines", {
       method: "GET",
       headers: {
@@ -34,7 +35,10 @@ export const fetchCuisine = (cuisineId) => {
     fetch(`http://localhost:3001/cuisines/${cuisineId}`)
       .then((res) => res.json())
       .then((cuisineRecipesJson) => {
+        
         dispatch({ type: SUCCESSFULLY_LOADED_CUISINE_RECIPES, payload: cuisineRecipesJson });
       });
   };
 };
+
+

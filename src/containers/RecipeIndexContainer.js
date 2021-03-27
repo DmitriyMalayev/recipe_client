@@ -42,5 +42,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(RecipeIndexContainer);
-
-  //super parent 
+//super parent 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom"; //Allows us to add links that we can convert to routes
 import { connect } from "react-redux";
-import { fetchCuisine } from "../actions/cuisines";
+import { fetchCuisine } from "../actions/cuisines"; //We're using {} because it's const fetchCuisines in cuisines
 
 // We're adding centering logic to render and also a a conditional statement that will render a spinner if loading is true and the content if loading is false. Also we want to setState() after we get the data from the API, setting loading to false in the process. This will allow us to trigger a re-render that will replace the spinner with our content.
 
@@ -56,11 +56,14 @@ class CuisineShowContainer extends Component {
 }
 
 const mapStateToProps = (state, { match }) => {
-  
   const cuisineId = match.params.cuisineId;
   return {
-    cuisine: state.cuisine.list.find((cuisine) => cuisine.id == cuisineId),
-    recipes: state.recipes.filter((recipe) => recipe.cuisine_id == cuisineId),
+    cuisine: state.cuisines.list.find(
+      (cuisine) => cuisine.id === parseInt(cuisineId)
+    ),
+    recipes: state.recipes.list.filter(
+      (recipe) => recipe.cuisine_id === parseInt(cuisineId)
+    ), //converting string to integer
   };
 };
 
