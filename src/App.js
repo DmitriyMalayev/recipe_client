@@ -33,7 +33,7 @@ function App() {
             exact
             to="/cuisines"
           >
-            Cuisines
+            Cuisine Collage
           </NavLink>
 
           <NavLink
@@ -51,9 +51,7 @@ function App() {
           <Route exact path="/recipes" component={RecipeIndexContainer} />
           <Route exact path="/cuisines" component={CuisineIndexContainer} />
           <Route exact path="/cuisines/:cuisineId" component={CuisineShowContainer} />
-          {/* <Route exact path="/recipes/:recipeId" component={RecipeShowContainer} /> */}
-          <Route exact path="/">
-            <RecipeIndexContainer />
+          <Route exact path="/"><RecipeIndexContainer />
           </Route>
         </Switch>
       </Router>

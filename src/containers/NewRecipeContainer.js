@@ -42,14 +42,13 @@ class NewRecipeContainer extends Component {
   render() {
     return (
       <div>
-        
         <img
-          className="w-full transform hover:scale-150 border-4 border-blue-500 shadow-lg"
+          className="max-w-4xl mx-auto mx-center"
           src={`http://localhost:3000/${newImage}`}
           alt={"recipe banner"}
         />
         <form
-          className="max-w-4xl w-11/12 mx-auto shadow-lg px-8 py-6"
+          className="max-w-4xl mx-auto shadow-lg px-8 py-6"
           onSubmit={this.handleSubmit}
         >
           <div></div>

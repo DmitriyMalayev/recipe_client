@@ -19,7 +19,7 @@ class CuisineIndexContainer extends Component {
         ) : (
           <CuisinesList cuisines={this.props.cuisines} />
         )}
-      </section>
+      </section> 
     );
   }
 }
