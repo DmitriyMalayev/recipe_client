@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { createRecipe } from "../actions/recipes";
 import { fetchCuisines } from "../actions/cuisines";
-import { connect } from "react-redux"; 
+import { connect } from "react-redux";
+let newImage = "new_recipe_banner.gif";
+
 class NewRecipeContainer extends Component {
   state = {
-    cuisines: [],
+    errors: {}, //works in conjunction with this.setState({errors})
   };
 
   handleSubmit = (event) => {
@@ -29,72 +31,88 @@ class NewRecipeContainer extends Component {
         this.props.history.push(`/recipes`);
       })
       .catch((errors) => {
-        this.setState({ errors });
+        this.setState({ errors }); //Object property shorthand same as errors:errors   updates state with errors
       });
   };
 
   componentDidMount() {
-    this.props.dispatchFetchCuisines()
+    this.props.dispatchFetchCuisines();
   }
 
   render() {
     return (
-      <form
-        className="max-w-4xl w-11/12 mx-auto shadow-lg px-8 py-6"
-        onSubmit={this.handleSubmit}
-      >
-        <h1 className="text-3xl text-center font-semibold mb-8">New Recipe</h1>
-        <fieldset className="">
-          <label htmlFor="cuisines">
-            Please Choose a Pre-Selected Cuisine:
-            <select name="cuisine_id" id="cuisine_id">
-              {this.props.cuisines.map((cuisine) => (
-                <option key={cuisine.id} value={cuisine.id}>
-                  {cuisine.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label htmlFor="name" className="block uppercase">
-            Recipe Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            className="w-full border-2 p-4 my-4"
-          />
-        </fieldset>
-        <fieldset className="">
-          <label htmlFor="description" className="block uppercase">
-            Recipe Description
-          </label>
-          <textarea
-            type="text"
-            name="description"
-            id="description"
-            className="w-full border-2 p-4 my-4"
-          ></textarea>
-        </fieldset>
-        <fieldset className="">
-          <label htmlFor="recipe_image" className="block uppercase">
-            Recipe Image
-          </label>
-
-          <input
-            type="file"
-            name="recipe_image"
-            id="recipe_image"
-            className="w-full my-4"
-          />
-        </fieldset>
-        <button
-          type="submit"
-          className="w-full p-4 bg-blue-300 mt-4 hover:bg-blue-400 transition-all duration-200"
+      <div>
+        
+        <img
+          className="w-full transform hover:scale-150 border-4 border-blue-500 shadow-lg"
+          src={`http://localhost:3000/${newImage}`}
+          alt={"recipe banner"}
+        />
+        <form
+          className="max-w-4xl w-11/12 mx-auto shadow-lg px-8 py-6"
+          onSubmit={this.handleSubmit}
         >
-          Add Recipe
-        </button>
-      </form>
+          <div></div>
+          <h1 className="text-3xl text-center font-semibold mb-8">
+            New Recipe
+          </h1>
+
+          <fieldset className="">
+            <label htmlFor="cuisines">
+              Please Choose a Pre-Selected Cuisine:
+              <select
+                className="text-blue-800 bg-blue-100"
+                name="cuisine_id"
+                id="cuisine_id"
+              >
+                {this.props.cuisines.map((cuisine) => (
+                  <option key={cuisine.id} value={cuisine.id}>
+                    {cuisine.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label htmlFor="name" className="block uppercase">
+              Recipe Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              className="w-full border-2 p-4 my-4"
+            />
+          </fieldset>
+          <fieldset className="">
+            <label htmlFor="description" className="block uppercase">
+              Recipe Description
+            </label>
+            <textarea
+              type="text"
+              name="description"
+              id="description"
+              className="w-full border-2 p-4 my-4"
+            ></textarea>
+          </fieldset>
+          <fieldset className="">
+            <label htmlFor="recipe_image" className="block uppercase">
+              Recipe Image
+            </label>
+
+            <input
+              type="file"
+              name="recipe_image"
+              id="recipe_image"
+              className="w-full my-4"
+            />
+          </fieldset>
+          <button
+            type="submit"
+            className="w-full p-4 bg-blue-300 mt-4 hover:bg-blue-400 transition-all duration-200"
+          >
+            Add Recipe
+          </button>
+        </form>
+      </div>
     );
   }
 }
@@ -105,7 +123,6 @@ const mapStateToProps = (state) => {
   };
 };
 //state is from store
-
 
 const mapDispatchToProps = (dispatch) => {
   return {

@@ -7,7 +7,7 @@ const CuisinesList = ({ cuisines }) => {
       <h1>Cuisines List</h1>
       <ul>
         {cuisines.map((cuisine) => (
-          <CuisineListItem key={cuisine.id} cuisine={cuisine} />
+          <CuisineListItem key={cuisine.id} cuisine={cuisine} />   //passing props so other components can use them if the 
         ))}
       </ul>
     </>

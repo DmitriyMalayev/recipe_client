@@ -1,6 +1,7 @@
 import React from "react";
 const RecipeListItem = ({ recipe }) => {
   let item = "default_image.jpeg";
+  
   return (
     <li key={recipe.id}>
       <strong>

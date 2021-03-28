@@ -24,18 +24,18 @@ export const fetchRecipes = () => {    //files in actions directory are never co
 export const createRecipe = (recipe) => {
   return (dispatch) => {
     return fetch("http://localhost:3001/recipes", {
-      method: "POST",
-      body: recipe,
+      method: "POST",   //Using POST because we want to submit data to the server. 
+      body: recipe,  //passing in the argument
     })
       .then((res) => {
-        if (res.ok) {
+        if (res.ok) {   //Any response is constitutes a fulfilled promise this is why we need to check if the response was also successful on the server side, so we can do something different if it's not. 
           return res.json();
         } else {
-          return res.json().then((errors) => Promise.reject(errors));
+          return res.json().then((errors) => Promise.reject(errors));   //Creates a new rejected promise for the provided reason.
         }
       })
       .then((data) => {
-        dispatch({ type: ADD_RECIPE, payload: data });
+        dispatch({ type: ADD_RECIPE, payload: data });  //adding data 
       });
   };
 };
