@@ -1,8 +1,6 @@
 import NewRecipeContainer from "./containers/NewRecipeContainer";
 import CuisineIndexContainer from "./containers/CuisinesIndexContainer";
 import RecipeIndexContainer from "./containers/RecipeIndexContainer";
-import CuisineShowContainer from "./containers/CuisineShowContainer";
-// import RecipeShowContainer from "./containers/RecipeShowContainer";
 
 import React from "react";
 import {
@@ -50,8 +48,6 @@ function App() {
           <Route exact path="/recipes/new" component={NewRecipeContainer} />
           <Route exact path="/recipes" component={RecipeIndexContainer} />
           <Route exact path="/cuisines" component={CuisineIndexContainer} />
-          <Route exact path="/cuisines/:cuisineId" component={CuisineShowContainer} />
-          {/* <Route exact path="/recipes/:recipeId" component={RecipeShowContainer} /> */}
           <Route exact path="/">
             <RecipeIndexContainer />
           </Route>

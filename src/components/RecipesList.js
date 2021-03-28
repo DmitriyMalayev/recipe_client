@@ -12,6 +12,12 @@ const RecipesList = ({ recipes }) => {
         src={banner}
         alt={"recipe banner"}
       />
+      <select onSelect={handleSelect}>
+        <option></option>
+        <option></option>
+        <option></option>
+        <option></option>
+      </select>
       <ul className="grid grid-cols-3 grid-rows-5 gap-10 place-items-auto border-4 border-blue-500 shadow-lg transition-hover:scale-110">
         {recipes.map((recipe) => (
           <RecipeListItem
