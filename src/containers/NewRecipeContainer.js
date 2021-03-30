@@ -3,6 +3,8 @@ import { createRecipe } from "../actions/recipes";
 import { fetchCuisines } from "../actions/cuisines";
 import { connect } from "react-redux";
 let newImage = "new_recipe_banner.gif";
+let form_background = "form_background.jpeg";
+
 
 class NewRecipeContainer extends Component {
   state = {
@@ -31,7 +33,8 @@ class NewRecipeContainer extends Component {
         this.props.history.push(`/recipes`);
       })
       .catch((errors) => {
-        this.setState({ errors }); //Object property shorthand same as errors:errors   updates state with errors
+        this.setState({ errors });
+        //Object property shorthand same as errors:errors   updates state with errors
       });
   };
 
@@ -50,17 +53,16 @@ class NewRecipeContainer extends Component {
         <form
           className="max-w-4xl mx-auto shadow-lg px-8 py-6"
           onSubmit={this.handleSubmit}
+          style={{
+            backgroundImage: `url(http://localhost:3000/${form_background})`,
+          }}
         >
-          <div></div>
-          <h1 className="text-3xl text-center font-semibold mb-8">
-            New Recipe
-          </h1>
-
+          <div class="bg-cover font-bold"></div>
           <fieldset className="">
-            <label htmlFor="cuisines">
+            <label htmlFor="cuisines" className="font-semibold text-base text-blue-800  ">
               Please Choose a Pre-Selected Cuisine:
               <select
-                className="text-blue-800 bg-blue-100"
+                className="text-red-900 bg-blue-100"
                 name="cuisine_id"
                 id="cuisine_id"
               >
@@ -70,8 +72,10 @@ class NewRecipeContainer extends Component {
                   </option>
                 ))}
               </select>
+              <br />
+              <br />
             </label>
-            <label htmlFor="name" className="block uppercase">
+            <label htmlFor="name" className="block uppercase font-semibold">
               Recipe Name
             </label>
             <input
@@ -82,18 +86,24 @@ class NewRecipeContainer extends Component {
             />
           </fieldset>
           <fieldset className="">
-            <label htmlFor="description" className="block uppercase">
+            <label
+              htmlFor="description"
+              className="block uppercase font-semibold"
+            >
               Recipe Description
             </label>
             <textarea
               type="text"
               name="description"
               id="description"
-              className="w-full border-2 p-4 my-4"
+              className="w-full border-2 p-4 my-4 font-semibold"
             ></textarea>
           </fieldset>
           <fieldset className="">
-            <label htmlFor="recipe_image" className="block uppercase">
+            <label
+              htmlFor="recipe_image"
+              className="block uppercase font-semibold"
+            >
               Recipe Image
             </label>
 
@@ -106,7 +116,7 @@ class NewRecipeContainer extends Component {
           </fieldset>
           <button
             type="submit"
-            className="w-full p-4 bg-blue-300 mt-4 hover:bg-blue-400 transition-all duration-200"
+            className="w-full p-4 bg-blue-300 mt-4 hover:bg-blue-400 transition-all duration-200 font-semibold"
           >
             Add Recipe
           </button>

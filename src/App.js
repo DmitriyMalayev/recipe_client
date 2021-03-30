@@ -18,7 +18,7 @@ function App() {
       <Router>
         <nav className="text-center bg-blue-900 text-yellow-100 p-4">
           {/* If the URL exactly matches the to= property then the active className will be applied.  */}
-          <NavLink 
+          <NavLink
             className="inline-block px-4 py-2"
             activeClassName="text-yellow-300"
             exact
@@ -39,19 +39,24 @@ function App() {
           <NavLink
             className="inline-block px-4 py-2"
             activeClassName="text-yellow-300"
-            exact 
+            exact
             to="/recipes/new"
           >
             New Recipe
           </NavLink>
         </nav>
 
-        <Switch>  
+        <Switch>
           <Route exact path="/recipes/new" component={NewRecipeContainer} />
           <Route exact path="/recipes" component={RecipeIndexContainer} />
           <Route exact path="/cuisines" component={CuisineIndexContainer} />
-          <Route exact path="/cuisines/:cuisineId" component={CuisineShowContainer} />
-          <Route exact path="/"><RecipeIndexContainer />
+          <Route
+            exact
+            path="/cuisines/:cuisineId"
+            component={CuisineShowContainer}
+          />
+          <Route exact path="/">
+            <RecipeIndexContainer />
           </Route>
         </Switch>
       </Router>
@@ -59,10 +64,4 @@ function App() {
   );
 }
 
-
-
-
 export default App;
-
-
-
