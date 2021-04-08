@@ -8,3 +8,5 @@ const CuisineListItem = ({ cuisine }) => {
 };
 
 export default CuisineListItem;
+
+//Returns names of cuisines

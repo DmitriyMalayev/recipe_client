@@ -2,7 +2,7 @@ import React from "react";
 import RecipeListItem from "./RecipeListItem";
 let banner = "recipe_banner.gif";
 
-const RecipesList = ({ recipes }) => {
+const RecipesList = ({ recipes, cuisines, selectedCuisine, handleCuisineChange }) => {
   //destructured recipes, same as this.props.recipes
   return (
     <>
@@ -12,7 +12,30 @@ const RecipesList = ({ recipes }) => {
         src={banner}
         alt={"recipe banner"}
       />
-      <ul className="grid grid-cols-3 grid-rows-5 gap-10 place-items-auto border-4 border-blue-500 shadow-lg transition-hover:scale-110">
+      <label
+        htmlFor="filterByCuisine"
+        className="font-semibold text-base text-blue-800  "
+      >
+        Filter By Cuisine
+        <select
+          className="text-red-900 bg-blue-100"
+          name="cuisine_id"
+          id="cuisine_id"
+          value={selectedCuisine}
+          onChange={handleCuisineChange}
+        >
+          <option selected value="All">All</option>
+            
+          {cuisines.map((cuisine) => (
+            <option key={cuisine.id} value={cuisine.name}>
+              {cuisine.name}
+            </option>
+          ))}
+        </select>
+
+      </label>
+
+      <ul className="grid grid-cols-3 gap-10 place-items-auto border-4 border-blue-500 shadow-lg transition-hover:scale-110">
         {recipes.map((recipe) => (
           <RecipeListItem
             key={recipe.id}
@@ -20,6 +43,8 @@ const RecipesList = ({ recipes }) => {
             cuisine={recipe.cuisine_name}
             cuisine_id={recipe.cuisine_id}
           />
+          //sending props to RecipeListItem .
+          //Presentational component, taking in data and returning JSX.
         ))}
       </ul>
     </>

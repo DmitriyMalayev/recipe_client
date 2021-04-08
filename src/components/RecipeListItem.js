@@ -6,6 +6,7 @@ const RecipeListItem = ({ recipe }) => {
     <li key={recipe.id}>
       <strong>
         <h1 className="font-sans">{recipe.name}</h1>
+  
       </strong>
       <p className="bg-blue-200 bg-auto h-36">{recipe.description}</p>
       <img

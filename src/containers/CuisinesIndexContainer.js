@@ -4,7 +4,7 @@ import { fetchCuisines } from "../actions/cuisines";
 import CuisinesList from "../components/CuisinesList";
 
 class CuisineIndexContainer extends Component {
-  componentDidMount() {   
+  componentDidMount() {
     this.props.dispatchFetchCuisines();
   }
 
@@ -19,7 +19,7 @@ class CuisineIndexContainer extends Component {
         ) : (
           <CuisinesList cuisines={this.props.cuisines} />
         )}
-      </section> 
+      </section>
     );
   }
 }
@@ -41,8 +41,6 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CuisineIndexContainer);
-
-
 
 /*
 mapStateToProps 
