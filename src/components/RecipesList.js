@@ -14,25 +14,27 @@ const RecipesList = ({ recipes, cuisines, selectedCuisine, handleCuisineChange }
       />
       <label
         htmlFor="filterByCuisine"
-        className="font-semibold text-base text-blue-800  "
+        className="font-semibold text-lg text-blue-800 block bg-blue-300"
       >
-        Filter By Cuisine
+        Filter By Cuisine: &nbsp;
         <select
-          className="text-red-900 bg-blue-100"
+          className="text-red-900 font-semibold bg-blue-100"
           name="cuisine_id"
           id="cuisine_id"
           value={selectedCuisine}
           onChange={handleCuisineChange}
         >
-          <option selected value="All">All</option>
-            
+          <option selected value="All">
+            {" "}
+            All
+          </option>
+
           {cuisines.map((cuisine) => (
             <option key={cuisine.id} value={cuisine.name}>
               {cuisine.name}
             </option>
           ))}
         </select>
-
       </label>
 
       <ul className="grid grid-cols-3 gap-10 place-items-auto border-4 border-blue-500 shadow-lg transition-hover:scale-110">
