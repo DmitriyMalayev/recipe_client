@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from "react";  //containers/CuisineIndexContainer
 import { connect } from "react-redux";
 import { fetchCuisines } from "../actions/cuisines";
 import CuisinesList from "../components/CuisinesList";
@@ -41,6 +41,7 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CuisineIndexContainer);
+
 
 /*
 mapStateToProps 

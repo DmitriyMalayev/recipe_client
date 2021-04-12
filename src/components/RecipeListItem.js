@@ -1,12 +1,11 @@
 import React from "react";
 const RecipeListItem = ({ recipe }) => {
   let item = "default_image.jpeg";
-  
+
   return (
     <li key={recipe.id}>
       <strong>
         <h1 className="font-sans">{recipe.name}</h1>
-  
       </strong>
       <p className="bg-blue-200 bg-auto h-36">{recipe.description}</p>
       <img
@@ -19,4 +18,3 @@ const RecipeListItem = ({ recipe }) => {
 };
 
 export default RecipeListItem;
-//Renders each recipe item

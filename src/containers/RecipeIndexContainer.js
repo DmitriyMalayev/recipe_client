@@ -9,10 +9,8 @@ class RecipeIndexContainer extends Component {
     selectedCuisine: "All",
   };
 
-  //RecipeIndexContainer is a component (extends means is a component (as well) we're inheriting from Component. )
-
   componentDidMount() {
-    this.props.dispatchFetchRecipes(); //The parent is connect()
+    this.props.dispatchFetchRecipes();
     this.props.dispatchFetchCuisines();
   }
 
@@ -53,7 +51,6 @@ class RecipeIndexContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  //Take the state and make it accessible as props
   return {
     recipes: state.recipes.list,
     cuisines: state.cuisines.list,
@@ -66,30 +63,8 @@ const mapDispatchToProps = (dispatch) => {
     dispatchFetchCuisines: () => dispatch(fetchCuisines()),
   };
 };
-// The purpose of mapDispatchToProps to props is to give us functions that will dispatch the return values of action creators. We're dispatching the return value of fetchRecipes()
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(RecipeIndexContainer);
-//super parent
-
-// filterByCuisine(){
-//   if(this.state.selectedCuisine === "Italian") {
-//     this.props.recipes ===
-//   }
-
-//   return
-//   <fieldset className="">
-//     <label htmlFor="filterByCuisine" className="font-semibold"></label>
-//     Filter By Cuisine:
-//     <select className="text-orange-800" name="cuisine_id" id="cuisine_id">
-//       {this.props.cuisines.map((cuisine) => (
-//         <option key={cuisine.id} value={cuisine.id}>
-//           {" "}
-//           {cuisine.name}
-//         </option>
-//       ))}
-//     </select>
-//   </fieldset>;
-// }

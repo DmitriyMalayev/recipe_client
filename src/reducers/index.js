@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import { combineReducers } from "redux"; 
 import cuisinesReducer from "./cuisines";
 import recipesReducer from "./recipes";
 
