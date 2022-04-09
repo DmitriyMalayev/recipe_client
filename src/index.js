@@ -1,15 +1,18 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
 import App from "./App";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
 import store from "./store";
 
-//StrictMode highlights potential problems in an application. 
-ReactDOM.render( 
-  <React.StrictMode> 
+import { BrowserRouter } from "react-router-dom";
+
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(
+  <BrowserRouter>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById("root")
 );

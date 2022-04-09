@@ -4,32 +4,18 @@ import RecipeIndexContainer from "./containers/RecipeIndexContainer";
 import NavigationBar from "./NavigationBar";
 
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-
-
-
-
-
-
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <nav className="text-center bg-blue-900 text-yellow-100 p-4">
-          <NavigationBar />
-        </nav>
-
-        <Switch>
-          <Route exact path="/recipes/new" component={NewRecipeContainer} />
-          <Route exact path="/recipes" component={RecipeIndexContainer} />
-          <Route exact path="/cuisines" component={CuisineIndexContainer} />
-          <Route exact path="/">
-            <RecipeIndexContainer />
-          </Route>
-        </Switch>
-      </Router>
+    <div className="text-center bg-blue-900 text-yellow-100 p-4">
+      <NavigationBar />
+      <Routes>
+        <Route path="/" element={<RecipeIndexContainer />} />
+        <Route path="/recipes/new" element={<NewRecipeContainer />} />
+        <Route path="/recipes" element={<RecipeIndexContainer />} />
+        <Route path="/cuisines" element={<CuisineIndexContainer />} />
+      </Routes>
     </div>
   );
 }
